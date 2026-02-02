@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oficina de Leyes</title>
+
+<style>
+body{
+  margin:0;
+  font-family: Arial, sans-serif;
+  background:#111;
+  color:white;
+}
+
+/* FONDO ÚNICO PARA AMBAS PANTALLAS */
+.fondo-comun{
+  min-height:100vh;
+  background:
+    linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)),
+    url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=900&q=80');
+  background-size:cover;
+  background-position:center;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:20px;
+}
+
+/* PANTALLA 2 OCULTA AL INICIO */
+#pantalla2{
+  display:none;
+}
+
+/* BOTÓN PRINCIPAL */
+.btn-consulta{
+  margin-top:30px;
+  padding:12px 20px;
+  font-size:18px;
+  background:#d4af37;
+  border:none;
+  cursor:pointer;
+  border-radius:8px;
+}
+
+/* CAJA DEL FORMULARIO SOBRE LA IMAGEN */
+.form-container{
+  max-width:500px;
+  width:100%;
+  background:rgba(255,255,255,0.95);
+  color:black;
+  padding:20px;
+  border-radius:12px;
+  box-shadow:0 0 10px rgba(0,0,0,0.3);
+}
+
+/* CAMPOS */
+input, select, button{
+  width:100%;
+  padding:10px;
+  margin:10px 0;
+  font-size:16px;
+}
+
+/* BOTÓN WHATSAPP */
+.btn-whatsapp{
+  background:#25D366;
+  color:white;
+  border:none;
+  cursor:pointer;
+}
+</style>
+
+<script>
+function irAConsulta(){
+  document.getElementById("pantalla1").style.display = "none";
+  document.getElementById("pantalla2").style.display = "flex";
+}
+
+function enviarWhatsApp(){
+  let nombre = document.getElementById("nombre").value;
+  let consulta = document.getElementById("consulta").value;
+
+  if(nombre === "" || consulta === ""){
+    alert("Por favor llena todos los campos");
+    return;
+  }
+
+  let mensaje = "Hola, soy " + nombre + 
+  ". Quiero una consulta sobre: " + consulta;
+
+  let numeroAbogada = "50582032522"; // tu número
+
+  let enlace = "https://wa.me/" + numeroAbogada + "?text=" + encodeURIComponent(mensaje);
+
+  window.open(enlace, "_blank");
+}
+</script>
+</head>
+
+<body>
+
+<!-- ===== PANTALLA 1 ===== -->
+<section class="fondo-comun" id="pantalla1">
+
+  <h1 style="color:#d4af37;">OFICINA DE LEYES</h1>
+  <h2>Lic. Glenda del Carmen Saballos Díaz</h2>
+  <p>Abogado y Notario Público</p>
+
+  <div style="line-height:1.8; margin-top:15px;">
+    ✔ Casos civiles <br>
+    ✔ Penales <br>
+    ✔ De familia <br>
+    ✔ Escrituras <br>
+    ✔ Casamientos <br>
+    ✔ Divorcios <br>
+    ✔ Inscripciones de propiedad <br>
+    ✔ Otros
+  </div>
+
+  <button class="btn-consulta" onclick="irAConsulta()">
+    👉 Ir a Consulta
+  </button>
+</section>
+
+<!-- ===== PANTALLA 2 (MISMA IMAGEN DE FONDO) ===== -->
+<section class="fondo-comun" id="pantalla2">
+
+  <div class="form-container">
+    <h2>Solicitud de Consulta</h2>
+
+    <input type="text" id="nombre" placeholder="Escribe tu nombre">
+
+    <select id="consulta">
+      <option value="">Selecciona tipo de consulta</option>
+      <option value="Casos civiles">Casos civiles</option>
+      <option value="Casos penales">Casos penales</option>
+      <option value="Derecho familiar">Derecho familiar</option>
+      <option value="Escrituras">Escrituras</option>
+      <option value="Divorcio">Divorcio</option>
+      <option value="Inscripción de propiedad">Inscripción de propiedad</option>
+      <option value="Otra consulta">Otra consulta</option>
+    </select>
+
+    <button class="btn-whatsapp" onclick="enviarWhatsApp()">
+      Enviar por WhatsApp
+    </button>
+  </div>
+
+</section>
+
+</body>
+</html>
